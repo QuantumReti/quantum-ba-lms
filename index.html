@@ -104,14 +104,15 @@ https://quantum-ba-lms.pages.dev
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-// Firebase config
+// Firebase config - UPDATE WITH YOUR REAL CONFIG FROM FIREBASE CONSOLE
+// Get from: Firebase Console → Project Settings → Your apps → Web → Config
 const firebaseConfig = {
-apiKey: "AIzaSyANu3BzN_K4r7vN_K9pQ8rS_T0u_V1wX2y",
-authDomain: "quantum-ba-lms.firebaseapp.com",
-projectId: "quantum-ba-lms-prod",
-storageBucket: "quantum-ba-lms-prod.appspot.com",
-messagingSenderId: "123456789012",
-appId: "1:123456789012:web:abcdef1234567890abcd"
+  apiKey: "YOUR_API_KEY_HERE",
+  authDomain: "quantum-ba-lms.firebaseapp.com",
+  projectId: "quantum-ba-lms",
+  storageBucket: "quantum-ba-lms.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID_HERE",
+  appId: "YOUR_APP_ID_HERE"
 };
 
 // Initialize
