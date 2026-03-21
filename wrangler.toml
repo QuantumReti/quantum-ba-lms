@@ -1,0 +1,14 @@
+name = "quantum-ba-lms"
+type = "javascript"
+compatibility_date = "2025-03-21"
+
+[env.production]
+vars = { ENVIRONMENT = "production" }
+
+[build.upload]
+format = "service-worker"
+
+# Serve static files from root directory
+[build]
+command = "echo 'Static HTML - no build needed'"
+cwd = "./"

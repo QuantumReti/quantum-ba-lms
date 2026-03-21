@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": ["/api/*"],
+  "routes": [
+    {
+      "pattern": "/*",
+      "methods": ["GET"],
+      "handler": "static"
+    }
+  ]
+}
