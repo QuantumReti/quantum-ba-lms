@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth h-full">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-    <link href="assets/css/styles.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+        rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -21,315 +23,1039 @@
             }
         }
     </script>
+<link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans h-full flex overflow-hidden">
 
-    <!-- Sidebar / Navigation -->
-    <nav class="w-64 bg-brand-900 text-white flex flex-col h-full border-r border-gray-800">
-        <!-- Brand -->
-        <div class="p-6 border-b border-gray-800">
-            <h1 class="font-serif text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                <i data-lucide="crosshair" class="text-brand-accent w-6 h-6"></i>
-                Quantum BA
-            </h1>
-            <p class="text-xs text-brand-accent mt-1 tracking-wider uppercase font-medium">Tactical Mastery</p>
-        </div>
+<body class="bg-brand-50 text-slate-800 font-sans antialiased h-full overflow-hidden flex">
 
-        <!-- User Profile -->
-        <div class="px-6 py-4 border-b border-gray-800">
-             <div class="flex items-center gap-3 mb-3">
-                <div class="w-10 h-10 rounded-full bg-brand-800 flex items-center justify-center border border-gray-700">
-                    <i data-lucide="user" class="text-gray-300 w-5 h-5"></i>
-                </div>
-                <div>
-                    <h3 class="font-medium text-sm text-gray-100 truncate" id="userNameDisplay">Cmdr. Jenkins</h3>
-                    <p class="text-xs text-gray-400" id="userRoleDisplay">Dir. Operations</p>
-                </div>
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen"
+        class="fixed inset-0 z-[100] bg-brand-900 flex items-center justify-center p-6 transition-opacity duration-500">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-brand-accent"></div>
+            <div class="text-center mb-8">
+                <h1 class="font-serif text-3xl text-brand-900 font-bold tracking-wide">Quantum BA</h1>
+                <p class="text-xs text-brand-accent mt-2 uppercase tracking-widest font-semibold">Tactical Mastery
+                    Portal</p>
             </div>
-            
-            <!-- XP Progress -->
-            <div class="space-y-1">
-                <div class="flex justify-between text-xs">
-                    <span class="text-gray-400">Level <span id="userLevelDisplay" class="text-gray-200">42</span></span>
-                    <span class="font-medium text-brand-accent"><span id="userXpDisplay">14.5</span>k / 18k XP</span>
-                </div>
-                <div class="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
-                    <div class="bg-gradient-to-r from-brand-accent to-blue-400 h-1.5 rounded-full" style="width: 80%"></div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Nav Links -->
-        <div class="flex-1 overflow-y-auto sidebar-scroll py-4">
-            <ul class="space-y-1 px-3">
-                <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-brand-800/50 text-brand-accent font-medium">
-                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-                        Dashboard
-                    </a>
-                </li>
-                 <li>
-                    <a href="#training-modules" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
-                        <i data-lucide="book-open" class="w-5 h-5 opacity-70"></i>
-                        Tactical Modules
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors justify-between flex-wrap">
-                        <div class="flex items-center gap-3">
-                             <i data-lucide="swords" class="w-5 h-5 opacity-70"></i>
-                             Sparring Lab
-                        </div>
-                        <span class="text-[10px] uppercase tracking-wider bg-brand-accent/20 text-brand-accent px-2 py-0.5 rounded">New</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
-                        <i data-lucide="shield-alert" class="w-5 h-5 opacity-70"></i>
-                        Intervention Shield
-                    </a>
-                </li>
-                 <li>
-                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors justify-between">
-                         <div class="flex items-center gap-3">
-                            <i data-lucide="bot" class="w-5 h-5 opacity-70"></i>
-                            AI Tutor
-                        </div>
-                        <div class="flex items-center gap-1">
-                             <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                            <span class="text-[10px] text-green-500">Online</span>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        
-        <div class="p-4 border-t border-gray-800">
-             <button class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
-                <i data-lucide="settings" class="w-4 h-4"></i> Settings
-            </button>
-        </div>
-    </nav>
-
-    <!-- Main Content Area -->
-    <main class="flex-1 flex flex-col h-full bg-gray-50 overflow-hidden relative">
-        <!-- Top Header -->
-        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center glass-panel sticky top-0 z-10 hidden sm:flex">
-             <div class="flex items-center gap-2 text-sm text-gray-500">
-                <i data-lucide="map-pin" class="w-4 h-4"></i>
-                <span>Sector: North America</span>
-                <span class="mx-2 text-gray-300">|</span>
-                <span class="flex items-center gap-1 text-green-600 font-medium">
-                    <i data-lucide="activity" class="w-4 h-4"></i> System Normal
-                </span>
+            <div id="login-form" class="space-y-4">
+                <input type="email" id="login-email" placeholder="Email Address"
+                    class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:border-brand-accent">
+                <input type="password" id="login-password" placeholder="Password"
+                    class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:border-brand-accent">
+                <button onclick="handleLogin()"
+                    class="w-full bg-brand-900 text-white p-3 rounded-lg font-bold text-sm hover:bg-brand-800 transition-colors shadow-lg shadow-brand-900/20 flex justify-center items-center">
+                    <span id="login-btn-text">Sign In / Register</span>
+                </button>
+                <div class="text-center mt-4 text-xs text-slate-500" id="login-msg">New users will be registered
+                    automatically.</div>
             </div>
-            
-            <div class="flex items-center gap-4">
-                <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
-                    <i data-lucide="bell" class="w-5 h-5"></i>
-                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+
+            <div id="register-form" class="space-y-4 hidden animate-fade-in">
+                <p class="text-sm font-bold text-brand-900 border-b pb-2">Complete Profile Registration</p>
+                <input type="text" id="reg-fname" placeholder="First Name"
+                    class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:border-brand-accent">
+                <input type="text" id="reg-lname" placeholder="Last Name"
+                    class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:border-brand-accent">
+                <input type="text" id="reg-role" placeholder="Role (e.g., Junior Agent)"
+                    class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:border-brand-accent">
+                <button onclick="handleRegister()"
+                    class="w-full bg-brand-accent text-white p-3 rounded-lg font-bold text-sm hover:bg-blue-600 transition-colors shadow-lg flex justify-center items-center">
+                    <span id="reg-btn-text">Create Account & Enter</span>
                 </button>
             </div>
-        </header>
+        </div>
+    </div>
 
-        <!-- Scrollable Content -->
-        <div class="flex-1 overflow-y-auto p-4 sm:p-8">
-            <div class="max-w-7xl mx-auto space-y-8">
-                
-                <!-- Welcome Banner -->
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
-                    <div class="absolute right-0 top-0 w-64 h-full bg-gradient-to-l from-brand-accent/5 to-transparent pointer-events-none"></div>
-                    <div>
-                        <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2">Continue Training, Commander.</h2>
-                        <p class="text-gray-600 italic">"In negotiation, whoever controls the frame controls the outcome."</p>
+    <!-- MAIN APP CONTAINER -->
+    <div id="app-container" class="w-full h-full flex hidden opacity-0 transition-opacity duration-500">
+
+        <!-- Sidebar Navigation -->
+        <aside
+            class="w-80 bg-[#0f172a] text-slate-300 h-full flex flex-col fixed left-0 top-0 z-20 transition-all duration-300 shadow-2xl">
+            <div class="p-6 pb-5 border-b border-slate-800 flex-shrink-0">
+                <div class="flex justify-between items-start">
+                    <h1 class="font-serif text-[28px] text-white font-bold tracking-wide">Quantum BA</h1>
+                    <div class="text-right">
+                        <div class="text-yellow-500 font-bold text-xs"><span id="nav-points">0</span> PTS</div>
+                        <div class="text-[9px] text-slate-400 uppercase tracking-widest font-semibold mt-1"
+                            id="user-role-display">AGENT PROFILE</div>
                     </div>
-                    <button class="whitespace-nowrap flex items-center gap-2 px-6 py-3 bg-brand-800 hover:bg-brand-900 text-white font-medium rounded-lg shadow-sm hover:shadow transition-all group">
-                        <i data-lucide="play" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
-                        Resume: Advanced Framing
+                </div>
+                <div class="text-[10px] text-brand-accent uppercase tracking-widest font-bold mt-4">SYNCING...</div>
+            </div>
+
+            <!-- Sidebar Tabs -->
+            <div class="px-5 py-4 border-b border-slate-800 bg-[#0f172a]">
+                <div class="flex space-x-1">
+                    <button onclick="switchTab('modules')" id="tab-modules"
+                        class="flex-1 py-2 rounded-lg text-[9px] font-bold uppercase tracking-wider transition-colors bg-brand-accent text-white shadow-md">Learn</button>
+                    <button onclick="switchTab('highlights')" id="tab-highlights"
+                        class="flex-1 py-2 rounded-lg text-[9px] font-bold uppercase tracking-wider text-slate-400 hover:text-white transition-colors">Favs
+                        ⭐</button>
+                    <button onclick="switchTab('ailab')" id="tab-ailab"
+                        class="flex-1 py-2 rounded-lg text-[9px] font-bold uppercase tracking-wider text-slate-400 hover:text-white transition-colors">AI
+                        Lab ✨</button>
+                    <button onclick="switchTab('admin')" id="tab-admin"
+                        class="flex-1 py-2 rounded-lg text-[9px] font-bold uppercase tracking-wider text-emerald-400 hover:text-white transition-colors hidden">Admin
+                        🛡️</button>
+                </div>
+            </div>
+
+            <div class="flex-1 overflow-y-auto sidebar-scroll p-4 space-y-1" id="nav-container">
+                <!-- Nav generated by JS -->
+            </div>
+
+            <div class="p-4 border-t border-slate-800 flex-shrink-0">
+                <div class="flex justify-between items-center px-1">
+                    <span class="text-[10px] text-slate-500" id="user-name-display">Logged in</span>
+                    <button onclick="logout()"
+                        class="text-[10px] text-slate-400 hover:text-white underline">Logout</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 h-full ml-80 overflow-y-auto bg-white relative" id="main-content">
+            <div
+                class="sticky top-0 glass-panel border-b border-slate-200 p-4 px-8 flex justify-between items-center z-10">
+                <div class="flex items-center space-x-3 text-sm text-slate-500 font-medium" id="breadcrumb">
+                    <span id="header-category"
+                        class="uppercase tracking-wider text-xs font-bold text-brand-accent">Phase</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+                    <span class="text-brand-900 font-semibold" id="header-module-title">Module</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button id="tts-btn" onclick="playModuleAudio()"
+                        class="flex items-center justify-center px-4 py-2 rounded-lg text-indigo-600 bg-indigo-50 hover:bg-indigo-100 transition-colors border border-indigo-200 text-xs font-bold"
+                        title="Listen to Module">
+                        <i id="tts-icon" data-lucide="headphones" class="w-4 h-4 mr-2"></i> <span id="tts-text">Play
+                            Audio ✨</span>
+                    </button>
+                    <button id="edit-module-btn" onclick="openEditModule()"
+                        class="hidden items-center justify-center px-4 py-2 rounded-lg text-emerald-600 bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-200 text-xs font-bold"
+                        title="Edit Content">
+                        <i data-lucide="edit-3" class="w-4 h-4 mr-2"></i> Edit Module
+                    </button>
+                    <button id="favorite-btn" onclick="toggleFavorite()"
+                        class="flex items-center justify-center w-10 h-10 rounded-full text-slate-400 hover:bg-yellow-50 hover:text-yellow-500 transition-colors border border-transparent hover:border-yellow-200"
+                        title="Add to Highlights">
+                        <i data-lucide="star" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="toggleAITool('mentor')"
+                        class="text-slate-500 hover:text-brand-accent p-2 rounded-full hover:bg-slate-100 transition-colors"
+                        title="Quantum AI Mentor">
+                        <i data-lucide="help-circle" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-8 py-12 pb-32" id="page-content"></div>
+
+            <div id="bottom-nav-bar"
+                class="fixed bottom-0 right-0 left-80 glass-panel border-t border-slate-200 p-4 px-8 flex justify-between items-center z-10">
+                <button id="prev-btn" onclick="navigateTo(currentIndex - 1)"
+                    class="flex items-center space-x-2 px-4 py-2 text-slate-600 hover:text-brand-900 disabled:opacity-30 disabled:cursor-not-allowed font-medium transition-colors">
+                    <i data-lucide="arrow-left" class="w-4 h-4"></i><span>Previous</span>
+                </button>
+                <button id="next-btn" onclick="navigateTo(currentIndex + 1)"
+                    class="flex items-center space-x-2 px-6 py-2 bg-brand-900 text-white rounded-lg hover:bg-brand-800 disabled:opacity-50 disabled:cursor-not-allowed font-medium transition-colors shadow-md">
+                    <span id="next-btn-text">Next Module</span><i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- AI TOOL: NEGOTIATION ENGINE -->
+    <div id="ai-negotiation-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/70 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col max-h-[95vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-purple-400"><i data-lucide="crosshair"
+                            class="w-5 h-5 mr-2"></i> Quantum Negotiation Engine ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Deal Structuring &
+                        Leverage Exploitation</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-y-auto flex flex-col md:flex-row bg-slate-50">
+                <!-- Inputs -->
+                <div
+                    class="w-full md:w-[400px] p-6 border-b md:border-b-0 md:border-r border-slate-200 space-y-4 bg-white flex-shrink-0 overflow-y-auto">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Asking
+                                Price</label>
+                            <input type="text" id="neg-ask"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-purple-400"
+                                placeholder="$850k">
+                        </div>
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Target
+                                Price</label>
+                            <input type="text" id="neg-target"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-purple-400"
+                                placeholder="$810k">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Days
+                                on Market</label>
+                            <input type="number" id="neg-dom"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-purple-400"
+                                placeholder="e.g. 45">
+                        </div>
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Vendor
+                                Motivation</label>
+                            <select id="neg-motivation"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none bg-white">
+                                <option value="Unknown / Testing the Market">Unknown / Testing Market</option>
+                                <option value="Distressed / Debt Pressure">Distressed / Debt Pressure</option>
+                                <option value="Divorce / Separation">Divorce / Separation</option>
+                                <option value="Bought Elsewhere (Bridging)">Bought Elsewhere (Bridging)</option>
+                                <option value="Deceased Estate">Deceased Estate</option>
+                                <option value="Developer Clearing Stock">Developer Clearing Stock</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label
+                            class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Leverage
+                            / Flaws / Context</label>
+                        <textarea id="neg-leverage"
+                            class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-purple-400 h-28 resize-none"
+                            placeholder="e.g., Needs $30k roof repair. Main road noise. Agent seems exhausted by the vendor..."></textarea>
+                    </div>
+
+                    <button onclick="generateNegotiationStrategy()"
+                        class="w-full bg-purple-600 text-white border border-purple-700 p-4 rounded-xl text-sm font-bold hover:bg-purple-700 transition-colors flex justify-center items-center shadow-lg shadow-purple-600/20 mt-4">
+                        <i data-lucide="crosshair" class="w-4 h-4 mr-2"></i> Draft Attack Strategy ✨
                     </button>
                 </div>
 
-                <!-- AI Tutor Quick Insights -->
-                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6 relative">
-                    <div class="absolute -top-3 left-6 bg-white px-3 border border-blue-100 rounded-full flex items-center gap-2 shadow-sm">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-brand-accent"></i>
-                        <span class="text-xs font-semibold text-brand-accent uppercase tracking-wider">Quant-AI Analysis</span>
+                <!-- Output -->
+                <div class="flex-1 p-6 relative bg-slate-50 flex flex-col">
+                    <div id="negotiation-empty-state"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60">
+                        <i data-lucide="target" class="w-16 h-16 mb-4 text-slate-300"></i>
+                        <p class="font-medium">Enter deal parameters to generate tactical offer structure.</p>
                     </div>
-                    <div class="flex items-start gap-4 mt-2">
-                        <div class="bg-white p-2 rounded-full border border-blue-100 flex-shrink-0">
-                             <i data-lucide="bot" class="w-6 h-6 text-brand-accent"></i>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-700 leading-relaxed mb-3">
-                                I've analyzed your recent Sparring Lab sessions. You are excelling in initial objection handling, but your closing timing is hesitating by an average of 1.2 seconds.
-                            </p>
-                            <div id="ai-tutor-status" class="flex items-center gap-2 h-6">
-                                <div class="flex gap-1">
-                                    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-                                </div>
-                                <span class="text-xs text-gray-500 italic">Generating optimized pathway...</span>
-                            </div>
-                        </div>
+                    <div id="negotiation-output"
+                        class="hidden flex-1 bg-white border border-slate-200 rounded-xl p-6 text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans overflow-y-auto shadow-inner">
                     </div>
                 </div>
-
-                <!-- Dashboard Grid -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    
-                    <!-- Left Column (Wider) -->
-                    <div class="lg:col-span-2 space-y-8">
-                        
-                        <!-- Active Module Preview -->
-                        <section class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                            <div class="border-b border-gray-100 p-6 flex justify-between items-center bg-gray-50/50">
-                                <div class="flex items-center gap-3">
-                                     <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
-                                         <i data-lucide="book-open" class="w-5 h-5"></i>
-                                     </div>
-                                     <div>
-                                         <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Active Module</h3>
-                                         <h2 class="text-lg font-bold text-gray-900 leading-tight">M3: Advanced Framing Techniques</h2>
-                                     </div>
-                                </div>
-                                <span class="text-sm font-medium text-brand-accent bg-blue-50 px-3 py-1 rounded-full">45% Complete</span>
-                            </div>
-                            
-                            <div class="p-6">
-                                <p class="text-gray-600 font-serif leading-relaxed mb-6">Learn how to subtly dictate the parameters of the negotiation before the client even realizes it has begun. Focus on pre-framing and anchoring.</p>
-                                
-                                <div class="space-y-4 mb-6">
-                                    <!-- Lesson Item -->
-                                    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-200">
-                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
-                                            <i data-lucide="check" class="w-4 h-4"></i>
-                                        </div>
-                                        <div class="flex-1">
-                                            <h4 class="text-sm font-semibold text-gray-900">L1: The Psychology of Context</h4>
-                                            <p class="text-xs text-gray-500">8 mins</p>
-                                        </div>
-                                    </div>
-                                    <!-- Active Lesson Item -->
-                                    <div class="flex items-center gap-4 p-3 rounded-lg bg-blue-50 border border-blue-100 cursor-pointer">
-                                        <div class="flex-shrink-0 w-8 h-8 rounded-full border-2 border-brand-accent flex items-center justify-center">
-                                            <div class="w-2.5 h-2.5 bg-brand-accent rounded-full"></div>
-                                        </div>
-                                        <div class="flex-1">
-                                            <h4 class="text-sm font-semibold text-brand-accent">L2: Pre-framing the Consultation</h4>
-                                            <p class="text-xs text-blue-400">Audio + Interactive Quiz • 12 mins</p>
-                                        </div>
-                                        <button onclick="playModuleAudio()" class="p-2 text-brand-accent rounded-full hover:bg-blue-100 transition-colors" title="Play Audio">
-                                            <i data-lucide="headphones" class="w-4 h-4"></i>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Quick Quiz Preview inline -->
-                                <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
-                                    <div class="flex items-start gap-3 mb-4">
-                                        <i data-lucide="help-circle" class="w-5 h-5 text-brand-accent mt-0.5 mt-0.5"></i>
-                                        <div>
-                                            <h4 class="text-sm font-bold text-gray-900">Knowledge Check</h4>
-                                            <p class="text-sm text-gray-600 mt-1 font-serif">When establishing a frame, which initial statement is most effective for a highly analytical client?</p>
-                                        </div>
-                                    </div>
-                                     <div class="space-y-2">
-                                        <button class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-300 bg-white text-sm font-medium text-gray-700">A. "Let me tell you a story about how we helped..."</button>
-                                        <button class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-300 bg-white text-sm font-medium text-gray-700">B. "I've prepared a data-driven breakdown of the current market velocities."</button>
-                                        <button class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-300 bg-white text-sm font-medium text-gray-700">C. "How are you feeling about the market right now?"</button>
-                                    </div>
-                                    <div class="mt-4 flex justify-end">
-                                         <button onclick="submitQuickQuiz()" class="text-sm font-medium text-brand-accent hover:text-blue-700 hidden">Submit Answer</button> <!-- Hidden until selected -->
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Performance Chart -->
-                        <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                            <div class="flex justify-between items-center mb-6">
-                                <h3 class="text-lg font-bold text-gray-900">Tactical Growth Velocity</h3>
-                                <select class="text-sm border-gray-300 rounded font-medium text-gray-600 bg-gray-50 border px-2 py-1 outline-none">
-                                    <option>Last 6 Weeks</option>
-                                    <option>This Quarter</option>
-                                    <option>Year to Date</option>
-                                </select>
-                            </div>
-                            <div class="h-64 mt-4 w-full relative">
-                                <canvas id="performanceChart"></canvas>
-                            </div>
-                        </section>
-
-                    </div>
-
-                    <!-- Right Column (Sidebar metrics) -->
-                    <div class="space-y-6">
-                        
-                        <!-- Skill Radar -->
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                             <div class="flex items-center gap-2 mb-4">
-                                <i data-lucide="radar" class="w-5 h-5 text-gray-400"></i>
-                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Skill Profile</h3>
-                            </div>
-                            <div class="relative h-48 w-full mt-4 flex items-center justify-center">
-                                <canvas id="skillRadar"></canvas>
-                            </div>
-                            <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-center">
-                                <div class="bg-green-50 text-green-700 py-1.5 rounded font-medium">Top: Market Analysis</div>
-                                <div class="bg-orange-50 text-orange-700 py-1.5 rounded font-medium">Focus: Tech Adapt.</div>
-                            </div>
-                        </div>
-
-                        <!-- Action Items / Scenarios -->
-                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                             <div class="flex items-center gap-2 mb-6">
-                                <i data-lucide="target" class="w-5 h-5 text-red-500"></i>
-                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Live Fire Drills</h3>
-                            </div>
-                            
-                            <div class="space-y-3">
-                                <div class="group border border-gray-200 rounded-lg p-4 hover:border-brand-accent cursor-pointer transition-colors" onclick="startScenario('hesitant-seller')">
-                                    <div class="flex justify-between items-start mb-2">
-                                        <h4 class="font-bold text-sm text-gray-900 group-hover:text-brand-accent transition-colors">The Hesitant Seller</h4>
-                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-700 uppercase">Hard</span>
-                                    </div>
-                                    <p class="text-xs text-gray-500 line-clamp-2 font-serif">Client pushing back on commission claiming a discount broker is cheaper.</p>
-                                    <div class="mt-3 flex items-center justify-between">
-                                        <span class="text-xs font-semibold text-brand-accent flex items-center gap-1">
-                                            <i data-lucide="zap" class="w-3 h-3"></i> 500 XP
-                                        </span>
-                                        <i data-lucide="arrow-right" class="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform"></i>
-                                    </div>
-                                </div>
-
-                                <div class="group border border-gray-200 rounded-lg p-4 hover:border-brand-accent cursor-pointer transition-colors border-dashed bg-gray-50/50">
-                                    <div class="flex items-center justify-center h-full min-h-[80px] text-gray-400 gap-2 font-medium text-sm group-hover:text-brand-accent">
-                                        <i data-lucide="plus" class="w-4 h-4"></i> Generate New Drill via AI
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
-        </div>
-    </main>
-
-    <!-- Modal for Scenarios (Hidden by default) -->
-    <div id="scenarioModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
-        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="closeScenario()"></div>
-        <div class="bg-white rounded-xl shadow-2xl z-10 w-full max-w-2xl overflow-hidden animate-fade-in relative">
-            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-400"></div>
-            <div class="p-6 sm:p-8" id="scenarioContent">
-                <!-- Content injected by JS -->
-            </div>
-            <button onclick="closeScenario()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-                <i data-lucide="x" class="w-5 h-5"></i>
-            </button>
         </div>
     </div>
-    
-    <script src="assets/js/app.js"></script>
+
+    <!-- AI TOOL: OUTREACH ARCHITECT -->
+    <div id="ai-architect-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/70 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] animate-fade-in">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-brand-900 text-white">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-orange-400"><i data-lucide="megaphone"
+                            class="w-5 h-5 mr-2"></i> Outreach Architect ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Generate Pattern
+                        Interrupts & Posts</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg"><i data-lucide="x"
+                        class="w-6 h-6"></i></button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Prospect Situation / Property
+                    Details:</label>
+                <textarea id="architect-input"
+                    class="w-full p-4 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-orange-400 h-28"
+                    placeholder="e.g., Prospect lost 3 auctions, getting emotional. Needs a reality check."></textarea>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="generateOutreach('script')"
+                        class="bg-orange-50 text-orange-600 border border-orange-200 p-3 rounded-lg text-sm font-bold hover:bg-orange-100 transition-colors flex justify-center items-center">Generate
+                        Call Script</button>
+                    <button onclick="generateOutreach('social')"
+                        class="bg-slate-50 text-slate-700 border border-slate-200 p-3 rounded-lg text-sm font-bold hover:bg-slate-100 transition-colors flex justify-center items-center">Generate
+                        Social Post</button>
+                </div>
+
+                <div id="architect-output"
+                    class="hidden mt-4 p-5 bg-orange-50/50 border border-orange-100 rounded-xl text-sm text-slate-800 whitespace-pre-line leading-relaxed font-serif">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: DOCUMENT DECODER -->
+    <div id="ai-decoder-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col h-[85vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-rose-400"><i data-lucide="file-warning"
+                            class="w-5 h-5 mr-2"></i> Document Decoder ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Extract Leverage from
+                        B&P, Strata & Contracts</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col lg:flex-row bg-slate-50">
+                <div
+                    class="w-full lg:w-[450px] p-6 border-b lg:border-b-0 lg:border-r border-slate-200 bg-white flex flex-col">
+                    <label class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">Document
+                        Type</label>
+                    <select id="decode-type"
+                        class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none bg-white mb-4 focus:border-rose-400">
+                        <option value="Building & Pest Report">Building & Pest Report notes</option>
+                        <option value="Strata Minutes / AGM">Strata Minutes / AGM</option>
+                        <option value="Contract Special Conditions">Contract Special Conditions</option>
+                        <option value="Rental Ledger / Tenancy Agreement">Rental Ledger / Tenancy</option>
+                    </select>
+
+                    <label class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">Paste
+                        Dense Text</label>
+                    <textarea id="decode-input"
+                        class="w-full flex-1 p-4 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-rose-400 resize-none mb-4"
+                        placeholder="Paste the confusing, dense, or alarming text here..."></textarea>
+
+                    <button onclick="generateDecode()"
+                        class="w-full bg-rose-600 text-white border border-rose-700 p-4 rounded-xl text-sm font-bold hover:bg-rose-700 transition-colors flex justify-center items-center shadow-lg shadow-rose-600/20">
+                        <i data-lucide="scan-line" class="w-4 h-4 mr-2"></i> Extract Leverage ✨
+                    </button>
+                </div>
+
+                <div class="flex-1 p-6 overflow-y-auto bg-white relative shadow-inner">
+                    <div id="decoder-empty-state"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60">
+                        <i data-lucide="file-search" class="w-16 h-16 mb-4 text-slate-300"></i>
+                        <p class="font-medium text-center max-w-sm">Paste a document to instantly extract financial
+                            traps and negotiation leverage.</p>
+                    </div>
+                    <div id="decoder-output"
+                        class="hidden text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans pb-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: SELLING AGENT PROFILER -->
+    <div id="ai-profiler-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col h-[85vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-teal-400"><i data-lucide="user-minus"
+                            class="w-5 h-5 mr-2"></i> Selling Agent Profiler ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Psychological
+                        Profiling & Exploitation</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col lg:flex-row bg-slate-50">
+                <div
+                    class="w-full lg:w-[450px] p-6 border-b lg:border-b-0 lg:border-r border-slate-200 bg-white flex flex-col overflow-y-auto">
+                    <label class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">Agent
+                        Name & Agency</label>
+                    <input type="text" id="profiler-name"
+                        class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:border-teal-400 mb-4"
+                        placeholder="e.g. John Smith - Ray White">
+
+                    <label class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">Known
+                        Behaviors / Recent Interactions</label>
+                    <textarea id="profiler-notes"
+                        class="w-full flex-1 p-4 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-teal-400 resize-none mb-4"
+                        placeholder="e.g. Talks extremely fast, pushes everything to auction, avoids answering direct questions about building defects, high volume agent."></textarea>
+
+                    <button onclick="generateAgentProfile()"
+                        class="w-full bg-teal-600 text-white border border-teal-700 p-4 rounded-xl text-sm font-bold hover:bg-teal-700 transition-colors flex justify-center items-center shadow-lg shadow-teal-600/20">
+                        <i data-lucide="brain" class="w-4 h-4 mr-2"></i> Generate Agent Dossier ✨
+                    </button>
+                </div>
+
+                <div class="flex-1 p-6 overflow-y-auto bg-white relative shadow-inner">
+                    <div id="profiler-empty-state"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60">
+                        <i data-lucide="fingerprint" class="w-16 h-16 mb-4 text-slate-300"></i>
+                        <p class="font-medium text-center max-w-sm">Input agent behaviors to generate a tactical
+                            psychological profile.</p>
+                    </div>
+                    <div id="profiler-output"
+                        class="hidden text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans pb-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: DEAL AUTOPSY -->
+    <div id="ai-autopsy-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col h-[85vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-red-400"><i data-lucide="activity"
+                            class="w-5 h-5 mr-2"></i> Deal Autopsy ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Post-Mortem Deal
+                        Analysis</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col lg:flex-row bg-slate-50">
+                <div
+                    class="w-full lg:w-[450px] p-6 border-b lg:border-b-0 lg:border-r border-slate-200 bg-white flex flex-col overflow-y-auto">
+                    <label class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">What
+                        Happened? (Context of the Lost Deal)</label>
+                    <textarea id="autopsy-context"
+                        class="w-full flex-1 p-4 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-red-400 resize-none mb-4"
+                        placeholder="e.g. We offered $900k prior to auction. Agent said they had higher offers. We held firm because we thought it was a bluff. Property sold at auction for $980k. Client is furious we didn't push harder."></textarea>
+
+                    <button onclick="generateAutopsy()"
+                        class="w-full bg-red-600 text-white border border-red-700 p-4 rounded-xl text-sm font-bold hover:bg-red-700 transition-colors flex justify-center items-center shadow-lg shadow-red-600/20">
+                        <i data-lucide="stethoscope" class="w-4 h-4 mr-2"></i> Run Post-Mortem Analysis ✨
+                    </button>
+                </div>
+
+                <div class="flex-1 p-6 overflow-y-auto bg-white relative shadow-inner">
+                    <div id="autopsy-empty-state"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60">
+                        <i data-lucide="file-x" class="w-16 h-16 mb-4 text-slate-300"></i>
+                        <p class="font-medium text-center max-w-sm">Paste the context of a lost deal to receive brutal,
+                            objective feedback.</p>
+                    </div>
+                    <div id="autopsy-output"
+                        class="hidden text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans pb-8">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: OFF-MARKET ENGINE (ULTIMATE) -->
+    <div id="ai-offmarket-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-[1400px] shadow-2xl overflow-hidden flex flex-col h-[95vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-indigo-400"><i data-lucide="mail"
+                            class="w-5 h-5 mr-2"></i> Off-Market Acquisition Engine ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Multi-Channel Shadow
+                        Inventory Extraction</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col lg:flex-row bg-slate-50">
+                <div
+                    class="w-full lg:w-[450px] p-6 border-b lg:border-b-0 lg:border-r border-slate-200 bg-white flex flex-col overflow-y-auto flex-shrink-0">
+                    <div class="space-y-4">
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">1.
+                                Targeting Geography</label>
+                            <input type="text" id="offmarket-suburb"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:border-indigo-400"
+                                placeholder="Suburb(s) or Postcode">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label
+                                    class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Asset
+                                    Type / Specs</label>
+                                <input type="text" id="offmarket-specs"
+                                    class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:border-indigo-400"
+                                    placeholder="e.g. 4/2/2 House, 600m2+">
+                            </div>
+                            <div>
+                                <label
+                                    class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Budget
+                                    Cap ($)</label>
+                                <input type="text" id="offmarket-budget"
+                                    class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:border-indigo-400"
+                                    placeholder="e.g. Up to $1.8M">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">2.
+                                Target Demographic Vector</label>
+                            <select id="offmarket-demo"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none bg-white">
+                                <option value="Empty Nesters / Downsizers">Empty Nesters / Downsizers</option>
+                                <option value="Distressed Investors (Negative Cashflow)">Distressed Investors (Negative
+                                    Cashflow)</option>
+                                <option value="Tired Landlords (Problem Tenants)">Tired Landlords / Out-of-state owners
+                                </option>
+                                <option value="Deceased Estates / Probates">Deceased Estates / Probates</option>
+                                <option value="Pre-Market (Thinking of selling soon)">Pre-Market / Fence Sitters
+                                </option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">3.
+                                The Client 'Hook' (Your Leverage)</label>
+                            <input type="text" id="offmarket-hook"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:border-indigo-400"
+                                placeholder="e.g. Cash buyer, 14-day settlement, no B&P condition">
+                        </div>
+
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Additional
+                                Context / Specific Street Focus</label>
+                            <textarea id="offmarket-brief"
+                                class="w-full p-3 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-400 resize-none h-20"
+                                placeholder="e.g. Must be within the Mansfield State High School Catchment."></textarea>
+                        </div>
+
+                        <button onclick="generateOffMarketCampaign()"
+                            class="w-full bg-indigo-600 text-white border border-indigo-700 p-4 rounded-xl text-sm font-bold hover:bg-indigo-700 transition-colors flex justify-center items-center shadow-lg shadow-indigo-600/20 mt-2">
+                            <i data-lucide="rocket" class="w-4 h-4 mr-2"></i> Launch Omni-Channel Campaign ✨
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex-1 p-6 overflow-hidden flex flex-col bg-slate-50 relative">
+                    <div id="offmarket-empty-state"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60 z-10 bg-slate-50">
+                        <i data-lucide="mail-open" class="w-16 h-16 mb-4 text-slate-300"></i>
+                        <p class="font-medium text-center max-w-sm">Input strict acquisition parameters to generate a
+                            massive omni-channel extraction campaign.</p>
+                    </div>
+
+                    <div id="offmarket-scroll-container"
+                        class="flex-1 overflow-y-auto bg-white border border-slate-200 rounded-xl p-8 shadow-inner hidden">
+                        <!-- Chart Area -->
+                        <div id="offmarket-chart-wrapper"
+                            class="w-full max-w-2xl mx-auto mb-10 h-64 border-b border-slate-100 pb-8 hidden">
+                            <canvas id="offmarketChart"></canvas>
+                        </div>
+                        <!-- Text Report -->
+                        <div id="offmarket-output"
+                            class="text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: CLIENT INTERVENTION SHIELD (ULTIMATE) -->
+    <div id="ai-intervention-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-[1400px] shadow-2xl overflow-hidden flex flex-col h-[95vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-yellow-400"><i data-lucide="alert-octagon"
+                            class="w-5 h-5 mr-2"></i> Client Intervention Shield ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Mathematical
+                        De-escalation & Wealth Protection</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col lg:flex-row bg-slate-50">
+                <div
+                    class="w-full lg:w-[450px] p-6 border-b lg:border-b-0 lg:border-r border-slate-200 bg-white flex flex-col overflow-y-auto flex-shrink-0">
+                    <div class="space-y-4">
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Property
+                                Address / Identifier</label>
+                            <input type="text" id="intervene-address"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-yellow-400"
+                                placeholder="e.g. 42 Main St">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label
+                                    class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Intrinsic
+                                    Value ($)</label>
+                                <input type="number" id="intervene-value"
+                                    class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-yellow-400"
+                                    placeholder="e.g. 1100000">
+                            </div>
+                            <div>
+                                <label
+                                    class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Client's
+                                    Desired Offer ($)</label>
+                                <input type="number" id="intervene-offer"
+                                    class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-yellow-400"
+                                    placeholder="e.g. 1250000">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label
+                                    class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Compulsory
+                                    Competing Offers?</label>
+                                <select id="intervene-comp"
+                                    class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none bg-white">
+                                    <option value="Yes - Confirmed Multiple Offers">Yes - Verified</option>
+                                    <option value="Agent Bluffing / Unverified">Unverified (Likely Agent Bluff)</option>
+                                    <option value="No / First Offer">No - We are first</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Client
+                                    LVR / Deposit Risk</label>
+                                <select id="intervene-lvr"
+                                    class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none bg-white">
+                                    <option value="Safe (Cash / High Deposit)">Safe (Large Deposit / Cash)</option>
+                                    <option value="Risky (90%+ LVR / LMI Required)">Risky (90%+ LVR / Needs LMI)
+                                    </option>
+                                    <option value="Extremely Risky (Subject to Sale)">Subject to Sale / Bridging
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-1 block">Client's
+                                Emotional Justification / Excuse</label>
+                            <textarea id="intervene-context"
+                                class="w-full p-4 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-yellow-400 resize-none h-28"
+                                placeholder="e.g. They are tired of missing out at auction. The wife loves the kitchen island. They think 'it's a forever home so paying over doesn't matter'."></textarea>
+                        </div>
+
+                        <button onclick="generateIntervention()"
+                            class="w-full bg-yellow-600 text-white border border-yellow-700 p-4 rounded-xl text-sm font-bold hover:bg-yellow-700 transition-colors flex justify-center items-center shadow-lg shadow-yellow-600/20 mt-2">
+                            <i data-lucide="shield-alert" class="w-4 h-4 mr-2"></i> Deploy Financial Firewall ✨
+                        </button>
+                    </div>
+                </div>
+
+                <div class="flex-1 p-6 overflow-hidden flex flex-col bg-slate-50 relative">
+                    <div id="intervention-empty-state"
+                        class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60 z-10 bg-slate-50">
+                        <i data-lucide="hand-metal" class="w-16 h-16 mb-4 text-slate-300"></i>
+                        <p class="font-medium text-center max-w-sm">Feed the exact math to generate a brutal 'shock'
+                            sequence to snap clients out of overpaying.</p>
+                    </div>
+
+                    <div id="intervention-scroll-container"
+                        class="flex-1 overflow-y-auto bg-white border border-slate-200 rounded-xl p-8 shadow-inner hidden">
+                        <!-- Chart Area -->
+                        <div id="intervention-chart-wrapper"
+                            class="w-full max-w-2xl mx-auto mb-10 h-64 border-b border-slate-100 pb-8 hidden">
+                            <canvas id="interventionChart"></canvas>
+                        </div>
+                        <!-- Text Report -->
+                        <div id="intervention-output"
+                            class="text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- AI TOOL: LISTING AUDITOR (ULTIMATE EDITION) -->
+    <div id="ai-auditor-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-[1400px] shadow-2xl overflow-hidden flex flex-col h-[95vh] animate-fade-in">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-blue-400"><i data-lucide="search"
+                            class="w-5 h-5 mr-2"></i> Quantum Listing Auditor ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">80-Point Assessment
+                        Matrix & Due Diligence Scanner</p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="flex-1 overflow-hidden flex flex-col lg:flex-row bg-slate-50">
+                <!-- Left Column: Inputs & Map -->
+                <div
+                    class="w-full lg:w-[450px] p-6 border-b lg:border-b-0 lg:border-r border-slate-200 overflow-y-auto bg-white flex-shrink-0">
+                    <div class="space-y-5">
+                        <div>
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">1.
+                                Location Data</label>
+                            <input type="text" id="auditor-address" onchange="updateAuditorMap()"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-400 mb-3"
+                                placeholder="Property Address (e.g., 123 Smith St, QLD)">
+                            <div
+                                class="h-32 w-full rounded-lg overflow-hidden border border-slate-200 bg-slate-100 relative">
+                                <iframe id="auditor-map" width="100%" height="100%" frameborder="0" style="border:0"
+                                    src="" allowfullscreen></iframe>
+                                <div id="map-placeholder"
+                                    class="absolute inset-0 flex items-center justify-center text-slate-400 text-xs font-bold uppercase tracking-widest bg-slate-100">
+                                    <i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> Address Required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100">
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-3 block">2.
+                                Property Specifications</label>
+                            <div class="grid grid-cols-3 gap-2 mb-3">
+                                <div><label class="text-[10px] text-slate-500 uppercase">Beds</label><input
+                                        type="number" id="audit-beds"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none">
+                                </div>
+                                <div><label class="text-[10px] text-slate-500 uppercase">Baths</label><input
+                                        type="number" id="audit-baths"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none">
+                                </div>
+                                <div><label class="text-[10px] text-slate-500 uppercase">Cars</label><input
+                                        type="number" id="audit-cars"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div><label class="text-[10px] text-slate-500 uppercase">Land (sqm)</label><input
+                                        type="number" id="audit-land"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none"
+                                        placeholder="e.g. 600"></div>
+                                <div><label class="text-[10px] text-slate-500 uppercase">House (sqm)</label><input
+                                        type="number" id="audit-house"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none"
+                                        placeholder="e.g. 150"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div><label class="text-[10px] text-slate-500 uppercase">Asking Price $</label><input
+                                        type="text" id="audit-price"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none"
+                                        placeholder="e.g. 850,000"></div>
+                                <div><label class="text-[10px] text-slate-500 uppercase">Est. Rent $/wk</label><input
+                                        type="number" id="audit-rent"
+                                        class="w-full p-2 border border-slate-200 rounded-lg text-sm outline-none"
+                                        placeholder="e.g. 650"></div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100">
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-3 block">3.
+                                Client Profile</label>
+                            <select id="audit-buyer"
+                                class="w-full p-2.5 border border-slate-200 rounded-lg text-sm outline-none bg-white mb-4">
+                                <option value="Investor">Investor</option>
+                                <option value="Owner Occupier">Owner Occupier</option>
+                                <option value="First Home Buyer">First Home Buyer</option>
+                                <option value="Developer/Flipper">Developer / Flipper</option>
+                            </select>
+
+                            <div class="mb-2 flex justify-between items-center">
+                                <label class="text-[10px] text-slate-500 uppercase">Risk Tolerance</label>
+                                <span class="text-xs font-bold text-brand-accent bg-blue-50 px-2 py-0.5 rounded"
+                                    id="audit-risk-val">5 - Moderate</span>
+                            </div>
+                            <input type="range" min="1" max="10" value="5" id="audit-risk"
+                                class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-accent"
+                                oninput="updateRiskLabel(this.value)">
+                            <div class="flex justify-between text-[9px] text-slate-400 mt-1">
+                                <span>1 (Conservative)</span>
+                                <span>10 (Aggressive)</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100">
+                            <label
+                                class="text-[10px] font-bold text-brand-accent uppercase tracking-wider mb-2 block">4.
+                                Agent Notes / Listing Copy</label>
+                            <textarea id="auditor-input"
+                                class="w-full p-3 border border-slate-200 rounded-lg text-sm outline-none focus:ring-2 focus:ring-blue-400 h-24 resize-none"
+                                placeholder="Paste Realestate.com.au description..."></textarea>
+                        </div>
+
+                        <button onclick="runAudit()"
+                            class="w-full bg-blue-600 text-white border border-blue-700 p-4 rounded-xl text-sm font-bold hover:bg-blue-700 transition-colors flex justify-center items-center shadow-lg shadow-blue-600/20">
+                            <i data-lucide="cpu" class="w-4 h-4 mr-2"></i> Run Full Quantum Audit ✨
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Column: AI Report Output -->
+                <div class="w-full lg:flex-1 p-6 relative flex flex-col overflow-hidden bg-slate-50">
+                    <div class="flex justify-between items-center mb-4 flex-shrink-0">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center">
+                            <i data-lucide="file-text" class="w-4 h-4 mr-2 text-blue-500"></i> Client Assessment Report
+                        </h3>
+                        <button id="copy-audit-btn" onclick="copyAuditReport()"
+                            class="hidden text-xs font-bold text-blue-600 bg-blue-50 hover:bg-blue-100 border border-blue-200 px-4 py-2 rounded-lg transition-colors items-center shadow-sm">
+                            <i data-lucide="copy" class="w-4 h-4 mr-2"></i> Copy Full Report
+                        </button>
+                    </div>
+
+                    <div id="auditor-scroll-container"
+                        class="flex-1 overflow-y-auto bg-white border border-slate-200 rounded-xl p-8 shadow-inner relative">
+                        <div id="auditor-empty-state"
+                            class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 opacity-60">
+                            <i data-lucide="shield-check" class="w-16 h-16 mb-4 text-slate-300"></i>
+                            <p class="font-medium">Enter property parameters and run audit to generate intelligence.</p>
+                        </div>
+
+                        <!-- Radar Chart Canvas (Injected by JS) -->
+                        <div id="auditor-chart-wrapper"
+                            class="hidden w-full max-w-md mx-auto mb-8 h-64 border-b border-slate-100 pb-8">
+                            <canvas id="auditMatrixChart"></canvas>
+                        </div>
+
+                        <!-- Text Report -->
+                        <div id="auditor-output"
+                            class="text-[14px] text-slate-700 whitespace-pre-line leading-relaxed font-sans"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: OBJECTION LAB (SPARRING) -->
+    <div id="ai-lab-modal"
+        class="fixed inset-0 z-50 hidden bg-brand-900/80 backdrop-blur-sm items-center justify-center p-6">
+        <div
+            class="bg-white rounded-2xl w-full max-w-4xl shadow-2xl overflow-hidden flex flex-col h-[90vh] animate-fade-in">
+            <!-- Header -->
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white flex-shrink-0">
+                <div>
+                    <h2 class="text-xl font-bold flex items-center text-brand-accent"><i data-lucide="swords"
+                            class="w-5 h-5 mr-2"></i> Quantum Sparring Lab ✨</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest font-semibold">Live Objection
+                        Simulator & Scoring</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="finish-session-btn" onclick="finishSparringSession()"
+                        class="hidden bg-emerald-500/20 text-emerald-400 border border-emerald-500/50 px-4 py-2 rounded-lg text-xs font-bold hover:bg-emerald-500 hover:text-white transition-colors">
+                        <i data-lucide="save" class="w-4 h-4 inline mr-1 -mt-0.5"></i> Finish & Save
+                    </button>
+                    <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                            data-lucide="x" class="w-6 h-6"></i></button>
+                </div>
+            </div>
+
+            <!-- Menu View (Topics & Resume) -->
+            <div id="lab-menu-view" class="flex-1 overflow-y-auto p-8 bg-slate-50">
+                <div id="resume-session-container"
+                    class="hidden mb-8 p-6 bg-brand-50 border border-brand-accent/20 rounded-xl shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-brand-900 mb-1 flex items-center"><i data-lucide="clock"
+                                    class="w-4 h-4 mr-2 text-brand-accent"></i> Active Session Found</h3>
+                            <p class="text-sm text-slate-600">You have an unfinished sparring session. Pick up where you
+                                left off.</p>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button onclick="clearSparringSession()"
+                                class="px-4 py-2 text-sm font-bold text-slate-500 hover:text-red-500 transition-colors">Discard</button>
+                            <button onclick="resumeSparring()"
+                                class="bg-brand-accent text-white px-6 py-2 rounded-lg font-bold shadow-md hover:bg-blue-600 transition-colors">Resume
+                                Session</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-serif text-2xl font-bold text-brand-900 mb-2">Quantum Sparring Setup</h3>
+                    <p class="text-slate-500 text-sm">Configure your avatar and choose a category to initiate a live
+                        simulation.</p>
+                </div>
+
+                <!-- FIXED: Removed the global grid classes so the inner layout can control width -->
+                <div id="sparring-topics-grid" class="flex flex-col w-full">
+                    <!-- JS fills this -->
+                </div>
+            </div>
+
+            <!-- Chat View -->
+            <div id="lab-chat-view" class="hidden flex-1 flex flex-col overflow-hidden bg-slate-50">
+                <div class="flex-1 overflow-y-auto p-8 space-y-6" id="lab-chat-log">
+                    <!-- Chat logs populate here -->
+                </div>
+                <div class="p-4 border-t border-slate-200 bg-white flex-shrink-0">
+                    <div class="flex space-x-3 items-end max-w-4xl mx-auto">
+                        <button id="mic-btn" onclick="toggleSpeechRecognition()"
+                            class="p-3.5 bg-slate-100 text-slate-500 rounded-xl hover:bg-slate-200 transition-colors border border-slate-200 shadow-sm"
+                            title="Use Voice to Text">
+                            <i id="mic-icon" data-lucide="mic" class="w-5 h-5"></i>
+                        </button>
+                        <div class="flex-1 relative">
+                            <textarea id="lab-input"
+                                class="w-full p-3.5 border border-slate-300 rounded-xl text-sm outline-none focus:border-brand-accent resize-none max-h-32 shadow-sm"
+                                rows="2" placeholder="Speak or type your Quantum response..."></textarea>
+                            <div id="mic-status"
+                                class="absolute -top-6 left-2 text-[10px] text-red-500 font-bold hidden animate-pulse bg-red-50 px-2 py-0.5 rounded-full border border-red-100">
+                                <i data-lucide="radio" class="w-3 h-3 inline mr-1"></i>Listening...
+                            </div>
+                        </div>
+                        <button onclick="sendLabMessage()"
+                            class="bg-brand-900 text-white p-3.5 rounded-xl font-bold hover:bg-brand-800 transition-colors shadow-md h-full"><i
+                                data-lucide="send" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI TOOL: MENTOR BUBBLE -->
+    <div id="ai-mentor-modal"
+        class="fixed bottom-24 right-8 z-50 hidden w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col animate-fade-in">
+        <div class="bg-brand-accent p-4 text-white flex justify-between items-center">
+            <span class="font-bold text-sm flex items-center"><i data-lucide="brain-circuit" class="w-4 h-4 mr-2"></i>
+                Quantum AI Mentor ✨</span>
+            <button onclick="closeAllModals()" class="hover:bg-white/20 p-1 rounded"><i data-lucide="minus"
+                    class="w-4 h-4"></i></button>
+        </div>
+        <div class="h-64 overflow-y-auto p-4 space-y-4 text-[13px]" id="mentor-chat-log">
+            <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 text-slate-700">
+                Hi! I'm here to explain complex concepts like CDC vs LMR zoning, Bucket Companies, or Quantum philosophy
+                in real-time. What do you need?
+            </div>
+        </div>
+        <div class="p-3 border-t border-slate-100 bg-slate-50 relative">
+            <input id="mentor-input" type="text"
+                class="w-full p-2.5 pr-10 border border-slate-200 rounded-lg text-sm outline-none focus:border-brand-accent"
+                placeholder="Ask a question..." onkeypress="if(event.key === 'Enter') askMentor()">
+            <button onclick="askMentor()"
+                class="absolute right-4 top-4 text-brand-accent hover:scale-110 transition-transform"><i
+                    data-lucide="send" class="w-4 h-4"></i></button>
+        </div>
+    </div>
+
+    <!-- MASTER EXAM MODAL -->
+    <div id="master-exam-modal" class="fixed inset-0 z-[100] hidden bg-brand-900 overflow-y-auto">
+        <div class="max-w-4xl mx-auto p-8 min-h-screen flex flex-col justify-center animate-fade-in py-20">
+            <div class="text-center mb-12">
+                <h1 class="font-serif text-4xl text-white font-bold mb-4"><i data-lucide="award"
+                        class="w-10 h-10 inline-block text-yellow-400 mb-2"></i><br>Quantum Master Certification</h1>
+                <p class="text-slate-400 max-w-xl mx-auto">This 10-point rigorous exam tests your complete comprehension
+                    of the Quantum philosophy. Minimum 60% required to pass. A 'C' grade requires a retake.</p>
+            </div>
+            <div id="exam-questions-container" class="space-y-8"></div>
+            <div id="exam-results-container" class="hidden text-center bg-white p-12 rounded-3xl shadow-2xl mt-8"></div>
+            <div class="mt-12 text-center" id="exam-actions">
+                <button onclick="submitExam()"
+                    class="bg-brand-accent text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-blue-600 transition-colors shadow-xl shadow-brand-accent/20">Submit
+                    Certification Exam</button>
+                <button onclick="closeExam()" class="block w-full text-slate-500 mt-4 text-sm hover:text-white">Exit
+                    Exam (Lose Progress)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN ANALYTICS MODAL -->
+    <div id="admin-analytics-modal"
+        class="fixed inset-0 z-[110] hidden bg-brand-900/90 backdrop-blur-sm p-6 overflow-y-auto">
+        <div
+            class="bg-white rounded-2xl w-full max-w-5xl mx-auto shadow-2xl overflow-hidden flex flex-col min-h-[90vh] animate-fade-in relative mt-10 mb-10">
+            <div
+                class="p-6 border-b border-slate-100 flex justify-between items-center bg-[#0f172a] text-white sticky top-0 z-10">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold flex items-center text-emerald-400"><i
+                            data-lucide="bar-chart-2" class="w-6 h-6 mr-3"></i> Trainee Analytics Dashboard</h2>
+                    <p id="analytics-user-name"
+                        class="text-sm text-slate-400 mt-1 uppercase tracking-widest font-semibold">Loading Profile...
+                    </p>
+                </div>
+                <button onclick="closeAllModals()" class="p-2 hover:bg-white/10 rounded-lg transition-colors"><i
+                        data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="p-8 flex-1 bg-slate-50">
+                <!-- Top Stats Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Total Points</p>
+                        <p id="analytics-points" class="text-3xl font-bold text-brand-900">0 💎</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Master Exam Grade</p>
+                        <p id="analytics-exam-grade" class="text-3xl font-bold text-brand-900">Not Taken</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <p class="text-xs text-slate-500 uppercase tracking-widest font-bold mb-1">Phases Unlocked</p>
+                        <p id="analytics-phases" class="text-3xl font-bold text-brand-900">0/11</p>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-4 flex items-center"><i data-lucide="pie-chart"
+                                class="w-4 h-4 mr-2 text-brand-accent"></i> Module Mastery Progress</h3>
+                        <div class="relative h-64 w-full flex justify-center">
+                            <canvas id="progressChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-4 flex items-center"><i data-lucide="activity"
+                                class="w-4 h-4 mr-2 text-brand-accent"></i> Login Session Activity (Last 7 Days)</h3>
+                        <div class="relative h-64 w-full">
+                            <canvas id="activityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Coaching Insight Section -->
+                <div class="bg-emerald-900 rounded-xl shadow-lg border border-emerald-800 p-8 text-white">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <h3 class="text-xl font-bold flex items-center"><i data-lucide="sparkles"
+                                    class="w-5 h-5 mr-2 text-emerald-400"></i> Deep AI Coaching Insight</h3>
+                            <p class="text-sm text-emerald-200 mt-1">Synthesize progress, exam results, and activity
+                                into a tactical action plan.</p>
+                        </div>
+                        <button id="generate-deep-insight-btn"
+                            class="bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold shadow-lg hover:bg-emerald-600 transition-colors flex items-center">
+                            Generate Deep Analysis ✨
+                        </button>
+                    </div>
+                    <div id="deep-insight-container"
+                        class="hidden bg-white/10 p-6 rounded-lg text-sm leading-relaxed whitespace-pre-line border border-white/20 font-serif">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FIREBASE & CORE LOGIC -->
+<script type="module" src="assets/js/app.js"></script>
 </body>
+
 </html>
