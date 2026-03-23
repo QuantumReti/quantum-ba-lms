@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum BA | Tactical Mastery Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link href="assets/css/styles.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Playfair Display', 'serif'] },
+                    colors: {
+                        brand: { 50: '#f8fafc', 100: '#f1f5f9', 800: '#1e293b', 900: '#0f172a', accent: '#3b82f6', success: '#22c55e', warning: '#eab308', error: '#ef4444' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans h-full flex overflow-hidden">
+
+    <!-- Sidebar / Navigation -->
+    <nav class="w-64 bg-brand-900 text-white flex flex-col h-full border-r border-gray-800">
+        <!-- Brand -->
+        <div class="p-6 border-b border-gray-800">
+            <h1 class="font-serif text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <i data-lucide="crosshair" class="text-brand-accent w-6 h-6"></i>
+                Quantum BA
+            </h1>
+            <p class="text-xs text-brand-accent mt-1 tracking-wider uppercase font-medium">Tactical Mastery</p>
+        </div>
+
+        <!-- User Profile -->
+        <div class="px-6 py-4 border-b border-gray-800">
+             <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-full bg-brand-800 flex items-center justify-center border border-gray-700">
+                    <i data-lucide="user" class="text-gray-300 w-5 h-5"></i>
+                </div>
+                <div>
+                    <h3 class="font-medium text-sm text-gray-100 truncate" id="userNameDisplay">Cmdr. Jenkins</h3>
+                    <p class="text-xs text-gray-400" id="userRoleDisplay">Dir. Operations</p>
+                </div>
+            </div>
+            
+            <!-- XP Progress -->
+            <div class="space-y-1">
+                <div class="flex justify-between text-xs">
+                    <span class="text-gray-400">Level <span id="userLevelDisplay" class="text-gray-200">42</span></span>
+                    <span class="font-medium text-brand-accent"><span id="userXpDisplay">14.5</span>k / 18k XP</span>
+                </div>
+                <div class="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                    <div class="bg-gradient-to-r from-brand-accent to-blue-400 h-1.5 rounded-full" style="width: 80%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav Links -->
+        <div class="flex-1 overflow-y-auto sidebar-scroll py-4">
+            <ul class="space-y-1 px-3">
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-brand-800/50 text-brand-accent font-medium">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                        Dashboard
+                    </a>
+                </li>
+                 <li>
+                    <a href="#training-modules" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
+                        <i data-lucide="book-open" class="w-5 h-5 opacity-70"></i>
+                        Tactical Modules
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors justify-between flex-wrap">
+                        <div class="flex items-center gap-3">
+                             <i data-lucide="swords" class="w-5 h-5 opacity-70"></i>
+                             Sparring Lab
+                        </div>
+                        <span class="text-[10px] uppercase tracking-wider bg-brand-accent/20 text-brand-accent px-2 py-0.5 rounded">New</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
+                        <i data-lucide="shield-alert" class="w-5 h-5 opacity-70"></i>
+                        Intervention Shield
+                    </a>
+                </li>
+                 <li>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-800 text-gray-300 hover:text-white transition-colors justify-between">
+                         <div class="flex items-center gap-3">
+                            <i data-lucide="bot" class="w-5 h-5 opacity-70"></i>
+                            AI Tutor
+                        </div>
+                        <div class="flex items-center gap-1">
+                             <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span class="text-[10px] text-green-500">Online</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="p-4 border-t border-gray-800">
+             <button class="flex items-center justify-center gap-2 w-full px-4 py-2 text-sm font-medium text-white bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors">
+                <i data-lucide="settings" class="w-4 h-4"></i> Settings
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex flex-col h-full bg-gray-50 overflow-hidden relative">
+        <!-- Top Header -->
+        <header class="bg-white border-b border-gray-200 px-8 py-4 flex justify-between items-center glass-panel sticky top-0 z-10 hidden sm:flex">
+             <div class="flex items-center gap-2 text-sm text-gray-500">
+                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                <span>Sector: North America</span>
+                <span class="mx-2 text-gray-300">|</span>
+                <span class="flex items-center gap-1 text-green-600 font-medium">
+                    <i data-lucide="activity" class="w-4 h-4"></i> System Normal
+                </span>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <button class="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
+                    <i data-lucide="bell" class="w-5 h-5"></i>
+                    <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 sm:p-8">
+            <div class="max-w-7xl mx-auto space-y-8">
+                
+                <!-- Welcome Banner -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative overflow-hidden">
+                    <div class="absolute right-0 top-0 w-64 h-full bg-gradient-to-l from-brand-accent/5 to-transparent pointer-events-none"></div>
+                    <div>
+                        <h2 class="text-3xl font-serif font-bold text-gray-900 mb-2">Continue Training, Commander.</h2>
+                        <p class="text-gray-600 italic">"In negotiation, whoever controls the frame controls the outcome."</p>
+                    </div>
+                    <button class="whitespace-nowrap flex items-center gap-2 px-6 py-3 bg-brand-800 hover:bg-brand-900 text-white font-medium rounded-lg shadow-sm hover:shadow transition-all group">
+                        <i data-lucide="play" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                        Resume: Advanced Framing
+                    </button>
+                </div>
+
+                <!-- AI Tutor Quick Insights -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-6 relative">
+                    <div class="absolute -top-3 left-6 bg-white px-3 border border-blue-100 rounded-full flex items-center gap-2 shadow-sm">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-brand-accent"></i>
+                        <span class="text-xs font-semibold text-brand-accent uppercase tracking-wider">Quant-AI Analysis</span>
+                    </div>
+                    <div class="flex items-start gap-4 mt-2">
+                        <div class="bg-white p-2 rounded-full border border-blue-100 flex-shrink-0">
+                             <i data-lucide="bot" class="w-6 h-6 text-brand-accent"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-700 leading-relaxed mb-3">
+                                I've analyzed your recent Sparring Lab sessions. You are excelling in initial objection handling, but your closing timing is hesitating by an average of 1.2 seconds.
+                            </p>
+                            <div id="ai-tutor-status" class="flex items-center gap-2 h-6">
+                                <div class="flex gap-1">
+                                    <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+                                </div>
+                                <span class="text-xs text-gray-500 italic">Generating optimized pathway...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left Column (Wider) -->
+                    <div class="lg:col-span-2 space-y-8">
+                        
+                        <!-- Active Module Preview -->
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                            <div class="border-b border-gray-100 p-6 flex justify-between items-center bg-gray-50/50">
+                                <div class="flex items-center gap-3">
+                                     <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
+                                         <i data-lucide="book-open" class="w-5 h-5"></i>
+                                     </div>
+                                     <div>
+                                         <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Active Module</h3>
+                                         <h2 class="text-lg font-bold text-gray-900 leading-tight">M3: Advanced Framing Techniques</h2>
+                                     </div>
+                                </div>
+                                <span class="text-sm font-medium text-brand-accent bg-blue-50 px-3 py-1 rounded-full">45% Complete</span>
+                            </div>
+                            
+                            <div class="p-6">
+                                <p class="text-gray-600 font-serif leading-relaxed mb-6">Learn how to subtly dictate the parameters of the negotiation before the client even realizes it has begun. Focus on pre-framing and anchoring.</p>
+                                
+                                <div class="space-y-4 mb-6">
+                                    <!-- Lesson Item -->
+                                    <div class="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer border border-transparent hover:border-gray-200">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                                            <i data-lucide="check" class="w-4 h-4"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-sm font-semibold text-gray-900">L1: The Psychology of Context</h4>
+                                            <p class="text-xs text-gray-500">8 mins</p>
+                                        </div>
+                                    </div>
+                                    <!-- Active Lesson Item -->
+                                    <div class="flex items-center gap-4 p-3 rounded-lg bg-blue-50 border border-blue-100 cursor-pointer">
+                                        <div class="flex-shrink-0 w-8 h-8 rounded-full border-2 border-brand-accent flex items-center justify-center">
+                                            <div class="w-2.5 h-2.5 bg-brand-accent rounded-full"></div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-sm font-semibold text-brand-accent">L2: Pre-framing the Consultation</h4>
+                                            <p class="text-xs text-blue-400">Audio + Interactive Quiz • 12 mins</p>
+                                        </div>
+                                        <button onclick="playModuleAudio()" class="p-2 text-brand-accent rounded-full hover:bg-blue-100 transition-colors" title="Play Audio">
+                                            <i data-lucide="headphones" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Quick Quiz Preview inline -->
+                                <div class="bg-gray-50 rounded-lg p-5 border border-gray-200">
+                                    <div class="flex items-start gap-3 mb-4">
+                                        <i data-lucide="help-circle" class="w-5 h-5 text-brand-accent mt-0.5 mt-0.5"></i>
+                                        <div>
+                                            <h4 class="text-sm font-bold text-gray-900">Knowledge Check</h4>
+                                            <p class="text-sm text-gray-600 mt-1 font-serif">When establishing a frame, which initial statement is most effective for a highly analytical client?</p>
+                                        </div>
+                                    </div>
+                                     <div class="space-y-2">
+                                        <button class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-300 bg-white text-sm font-medium text-gray-700">A. "Let me tell you a story about how we helped..."</button>
+                                        <button class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-300 bg-white text-sm font-medium text-gray-700">B. "I've prepared a data-driven breakdown of the current market velocities."</button>
+                                        <button class="quiz-option w-full text-left px-4 py-3 rounded border border-gray-300 bg-white text-sm font-medium text-gray-700">C. "How are you feeling about the market right now?"</button>
+                                    </div>
+                                    <div class="mt-4 flex justify-end">
+                                         <button onclick="submitQuickQuiz()" class="text-sm font-medium text-brand-accent hover:text-blue-700 hidden">Submit Answer</button> <!-- Hidden until selected -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Performance Chart -->
+                        <section class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                            <div class="flex justify-between items-center mb-6">
+                                <h3 class="text-lg font-bold text-gray-900">Tactical Growth Velocity</h3>
+                                <select class="text-sm border-gray-300 rounded font-medium text-gray-600 bg-gray-50 border px-2 py-1 outline-none">
+                                    <option>Last 6 Weeks</option>
+                                    <option>This Quarter</option>
+                                    <option>Year to Date</option>
+                                </select>
+                            </div>
+                            <div class="h-64 mt-4 w-full relative">
+                                <canvas id="performanceChart"></canvas>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- Right Column (Sidebar metrics) -->
+                    <div class="space-y-6">
+                        
+                        <!-- Skill Radar -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                             <div class="flex items-center gap-2 mb-4">
+                                <i data-lucide="radar" class="w-5 h-5 text-gray-400"></i>
+                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Skill Profile</h3>
+                            </div>
+                            <div class="relative h-48 w-full mt-4 flex items-center justify-center">
+                                <canvas id="skillRadar"></canvas>
+                            </div>
+                            <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-center">
+                                <div class="bg-green-50 text-green-700 py-1.5 rounded font-medium">Top: Market Analysis</div>
+                                <div class="bg-orange-50 text-orange-700 py-1.5 rounded font-medium">Focus: Tech Adapt.</div>
+                            </div>
+                        </div>
+
+                        <!-- Action Items / Scenarios -->
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                             <div class="flex items-center gap-2 mb-6">
+                                <i data-lucide="target" class="w-5 h-5 text-red-500"></i>
+                                <h3 class="text-sm font-bold text-gray-900 uppercase tracking-wider">Live Fire Drills</h3>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div class="group border border-gray-200 rounded-lg p-4 hover:border-brand-accent cursor-pointer transition-colors" onclick="startScenario('hesitant-seller')">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-bold text-sm text-gray-900 group-hover:text-brand-accent transition-colors">The Hesitant Seller</h4>
+                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-100 text-red-700 uppercase">Hard</span>
+                                    </div>
+                                    <p class="text-xs text-gray-500 line-clamp-2 font-serif">Client pushing back on commission claiming a discount broker is cheaper.</p>
+                                    <div class="mt-3 flex items-center justify-between">
+                                        <span class="text-xs font-semibold text-brand-accent flex items-center gap-1">
+                                            <i data-lucide="zap" class="w-3 h-3"></i> 500 XP
+                                        </span>
+                                        <i data-lucide="arrow-right" class="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform"></i>
+                                    </div>
+                                </div>
+
+                                <div class="group border border-gray-200 rounded-lg p-4 hover:border-brand-accent cursor-pointer transition-colors border-dashed bg-gray-50/50">
+                                    <div class="flex items-center justify-center h-full min-h-[80px] text-gray-400 gap-2 font-medium text-sm group-hover:text-brand-accent">
+                                        <i data-lucide="plus" class="w-4 h-4"></i> Generate New Drill via AI
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Scenarios (Hidden by default) -->
+    <div id="scenarioModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+        <div class="absolute inset-0 bg-gray-900/60 backdrop-blur-sm transition-opacity" onclick="closeScenario()"></div>
+        <div class="bg-white rounded-xl shadow-2xl z-10 w-full max-w-2xl overflow-hidden animate-fade-in relative">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-orange-400"></div>
+            <div class="p-6 sm:p-8" id="scenarioContent">
+                <!-- Content injected by JS -->
+            </div>
+            <button onclick="closeScenario()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+    </div>
+    
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
