@@ -147,6 +147,11 @@
         async function saveUserData() {
             if (!window.currentUser || !window.userDocId) return;
 
+            if (firebaseConfig.apiKey === "dummy-api-key") {
+                updateUIState();
+                return;
+            }
+
             // Save to public trainees collection so Admin can view and User can login across devices
             const publicDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'trainees', window.userDocId);
             await setDoc(publicDocRef, window.userData, { merge: true });
@@ -192,6 +197,10 @@
 
         // --- CONTENT DATA (Structured for LMS) ---
         async function loadModulesData() {
+            if (firebaseConfig.apiKey === "dummy-api-key") {
+                buildDefaultModules();
+                return;
+            }
             try {
                 const modulesDocRef = doc(db, 'artifacts', appId, 'public', 'data', 'course', 'modules_list');
                 const snap = await getDoc(modulesDocRef);
