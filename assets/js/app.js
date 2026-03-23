@@ -3,11 +3,11 @@
         import { getFirestore, doc, setDoc, getDoc, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // --- GEMINI API SETUP ---
-        const apiKey = "";
-        const modelName = "gemini-2.5-flash-preview-09-2025";
+        const apiKey = "AIzaSyC5h0hBZr1d7cguIYUxjhLxtPV6CjqaoLc";
+        const modelName = "gemini-2.5-flash";
         window.callGemini = async function (userPrompt, systemInstruction) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ parts: [{ text: userPrompt }] }], systemInstruction: { parts: [{ text: systemInstruction }] } };
+            const payload = { contents: [{ parts: [{ text: userPrompt }] }], system_instruction: { parts: [{ text: systemInstruction }] } };
             try {
                 const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!response.ok) throw new Error('API Error');
@@ -17,7 +17,7 @@
         }
 
         // --- FIREBASE SETUP ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: 'dummy', projectId: 'dummy', appId: 'dummy' };
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -59,9 +59,6 @@
             if (!email || !pass) { msg.innerText = "Email and password required."; return; }
             btn.innerText = "Authenticating...";
 
-            if (!window.currentUser) { msg.innerText = "Connection error. Retrying..."; btn.innerText = "Sign In / Register"; return; }
-
-            // Check Master Admin Account
             if (email.toLowerCase() === 'josh@quantumbuyersagents.com' && pass === 'Quantum123!') {
                 window.userData = {
                     firstName: 'Joshua', lastName: 'Reti', role: 'General Manager',
@@ -71,11 +68,16 @@
                     favorites: [], isAdmin: true, loginHistory: [new Date().toISOString()]
                 };
                 window.userDocId = 'master_admin_josh';
-                await saveUserData();
-                await loadModulesData();
+                // Mock current user so various parts of the app don't fail validation
+                window.currentUser = { uid: 'master_admin_josh', email: email };
+                await saveUserData().catch(e => console.warn('Offline save failed', e));
+                await loadModulesData().catch(e => console.warn('Offline load failed', e));
                 enterApp();
                 return;
             }
+
+            if (!window.currentUser) { msg.innerText = "Connection error. Retrying..."; btn.innerText = "Sign In / Register"; return; }
+            // Check Master Admin Account block moved up
 
             // Cloud Login for Standard Users
             try {
@@ -137,8 +139,8 @@
                 loginHistory: [new Date().toISOString()]
             };
 
-            await saveUserData();
-            await loadModulesData();
+            await saveUserData().catch(e => console.warn('Offline save failed', e));
+            await loadModulesData().catch(e => console.warn('Offline load failed', e));
             enterApp();
         }
 
@@ -1805,7 +1807,7 @@
 
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
             const payload = {
-                contents: [{ parts: [{ text: cleanText }] }],
+                contents: [{ parts: [{ text: "Please convert the following text to speech exactly: " + cleanText }] }],
                 generationConfig: {
                     responseModalities: ["AUDIO"],
                     speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voiceSelection } } }
