@@ -147,7 +147,7 @@
         async function saveUserData() {
             if (!window.currentUser || !window.userDocId) return;
 
-            if (firebaseConfig.apiKey === "dummy-api-key") {
+            if (firebaseConfig.apiKey === "dummy" || firebaseConfig.apiKey === "dummy-api-key") {
                 updateUIState();
                 return;
             }
@@ -197,7 +197,7 @@
 
         // --- CONTENT DATA (Structured for LMS) ---
         async function loadModulesData() {
-            if (firebaseConfig.apiKey === "dummy-api-key") {
+            if (firebaseConfig.apiKey === "dummy" || firebaseConfig.apiKey === "dummy-api-key") {
                 buildDefaultModules();
                 return;
             }
